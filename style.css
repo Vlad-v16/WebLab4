@@ -1,0 +1,250 @@
+/* ----------------------------------------------------- */
+/* 2. Кастомні шрифти (Custom Fonts) */
+/* ----------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Open+Sans:wght@400;700&display=swap');
+
+:root {
+  --main-font: 'Montserrat', sans-serif;
+  --text-font: 'Open Sans', sans-serif;
+  --border-color: #333;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background-color: #f7f7f7;
+  font-family: var(--text-font);
+}
+
+/* ----------------------------------------------------- */
+/* 1. Розмітка сторінки за допомогою Grid */
+/* ----------------------------------------------------- */
+
+.weekly-plan-container {
+  /* Реакція на розмір екрану: обмежуємо загальний розмір */
+  max-width: 1200px;
+  min-width: 700px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 3px solid var(--border-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  display: grid;
+  /* Основна сітка: Заголовок, Основна частина, Нижня межа */
+  grid-template-rows: auto 1fr auto;
+  height: 90vh; /* Використовуємо 90% висоти вікна */
+}
+
+/* ----------------------------------------------------- */
+/* Header */
+/* ----------------------------------------------------- */
+.plan-header {
+  border-bottom: 2px solid var(--border-color);
+  padding: 10px 15px 0 15px;
+}
+
+.plan-title {
+  font-family: var(--main-font);
+  font-size: 2.5em; /* Реакція на розмір екрану: відносний розмір */
+  margin: 0 0 10px 0;
+  letter-spacing: 2px;
+}
+
+.header-details {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  font-size: 0.9em;
+  font-weight: 700;
+}
+
+.header-field {
+  flex-grow: 1;
+  padding-right: 20px;
+  position: relative;
+}
+
+.header-field span {
+  display: block;
+  margin-bottom: 3px;
+  color: #555;
+}
+
+.header-field .input-area {
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  width: 100%;
+  resize: none;
+  font-family: var(--text-font);
+  font-size: 1em;
+}
+
+.status-field {
+  flex-grow: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  white-space: nowrap;
+  padding-right: 0;
+}
+
+/* ----------------------------------------------------- */
+/* Main Grid - Основна Сітка */
+/* ----------------------------------------------------- */
+.main-grid {
+  display: grid;
+  /* 2 колонки: 1-а (To-Do) 25% ширини, 2-а (Дні) 75% ширини */
+  grid-template-columns: 25% 1fr;
+}
+
+/* ----------------------------------------------------- */
+/* To-Do Column (Колонка 1) */
+/* ----------------------------------------------------- */
+.goals-todo-column {
+  border-right: 2px solid var(--border-color);
+  padding: 0 15px 15px 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.column-header {
+  font-family: var(--main-font);
+  font-size: 1.2em;
+  text-align: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.goals-section, .everything-else-section, .next-week-section {
+  margin-bottom: 15px;
+}
+
+.goals-todo-column h2 {
+  font-family: var(--main-font);
+  font-size: 0.9em;
+  font-weight: 800;
+  margin: 5px 0;
+}
+
+.todo-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.todo-list label {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 2px;
+}
+
+.todo-list input[type="checkbox"] {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.todo-item {
+  border: none;
+  border-bottom: 1px solid #ccc;
+  width: 100%;
+  padding: 0;
+  resize: none;
+  font-family: var(--text-font);
+  font-size: 0.9em;
+}
+
+/* Next Week Section: Імітація нижньої межі як у шаблоні */
+.next-week-section {
+  flex-grow: 1; /* Займе весь доступний простір внизу */
+  padding-top: 10px;
+}
+
+/* ----------------------------------------------------- */
+/* Daily Schedules Grid (Колонка 2) */
+/* ----------------------------------------------------- */
+.daily-schedules-grid {
+  display: grid;
+  /* 3 колонки, 2 ряди для буднів, 1 ряд для вихідних */
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(2, 1fr) auto;
+}
+
+.day-cell {
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+}
+
+/* Видаляємо зайві межі */
+.day-cell:nth-child(3n) { border-right: none; }
+.day-cell.saturday { border-bottom: none; }
+.day-cell.sunday {
+  /* Sunday займає всі 3 колонки в останньому ряду */
+  grid-column: 1 / span 3;
+  border-right: none;
+  border-bottom: none;
+}
+
+.day-header {
+  font-family: var(--main-font);
+  font-size: 1em;
+  font-weight: 700;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+.day-notes {
+  flex-grow: 1;
+  width: calc(100% - 20px);
+  height: 100%;
+  border: none;
+  padding: 10px;
+  resize: none;
+  font-family: var(--text-font);
+  font-size: 0.95em;
+  box-sizing: border-box;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------------- */
+/* 3. Клікабельні чекбокси та редаговані поля */
+/* ----------------------------------------------------- */
+
+/* Забезпечуємо візуальний вигляд чекбоксів */
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  margin: 0;
+  cursor: pointer;
+  border: 1px solid var(--border-color);
+  appearance: none;
+  -webkit-appearance: none;
+  vertical-align: middle;
+}
+
+input[type="checkbox"]:checked {
+  background-color: var(--border-color);
+}
+
+/* Стилі для всіх текстових полів, щоб вони виглядали як поля для вводу/нотаток */
+.input-area, .todo-item, .day-notes {
+  /* Робить поля редагованими */
+  outline: none;
+  cursor: text;
+}
+
+/* ----------------------------------------------------- */
+/* Bottom Border Line */
+/* ----------------------------------------------------- */
+.bottom-border {
+  height: 15px;
+  background-color: var(--border-color);
+  margin-top: -1px; /* Накладання на останню лінію, щоб виглядати суцільно */
+}
